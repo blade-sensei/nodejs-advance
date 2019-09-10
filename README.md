@@ -1,132 +1,157 @@
-Road to ninja !
-==
+# nodejs-advance
 
-## Présentation
-Road to ninja, est un projet visant à améliorer les compétences techniques de l'utilisateur. Il a été pensé pour les domaines de la programmation/coding, mais aussi pour l'infrastucture (réseaux/systèmes), la sécurité informatique, l'IA et le design graphique.
+- Lien vers le code source:
 
-Le but du projet est de créer une application web, qui va répertorier tous les projets que l'utilisateur souhaite réaliser.
-Road to Ninja n'est pas un gestionnaire de projet à proprement parler, mais plutôt un outil permettant de se concentrer sur 1 seul projet à la fois. La particularité : pour passer au projet suivant, l'utilisateur doit finir celui en cours.
+https://github.com/blade-sensei/nodejs-advance
 
-Pour le moment, il n'y a pas de délai (temps) pour terminer un projet.
 
-## Pourquoi ?
+- API qui permet de récupérer une liste de projets, détail d'un projets et utilisateurs
 
-L'application vise à résoudre un problème de procrastination, d'organisation et de focus.
+- Authentification et récupération d'un token
 
-Bien qu'il s'agisse plutôt d'un problème personnel, je vais utiliser le pronom 'on' dans les exemples ci-dessous.
 
-- Quand on a plusieurs idées de projets, on ne sait pas toujours par où commencer, et une fois qu'un projet est terrminé, on abondonne les prochains par lassitude.
+Le projet comporte plusieurs routes principales
 
-- On perd la motivation et on procrastine par manque de motivation et par manque d'orientation.
+- localhost/api: Accès au routes pour récupérer des utilisateurs et projets
+- localhost/explorer: swagger pour tester l'API
+- localhost/seed: créer un jeu de données avec des utilisateurs et projets
 
-- On n'arrive pas à garder un focus, sur un objectif précis.
 
-En extension, le projet permettra aussi de garder une trace pour voir l'évolution des compétences.
+## Test
 
-## Comment ?
-### Ce projet va-t-il améliorer mes compétences ?
+- Créer un base de données mongo appelé "dev" en local
+- Lancez le serveur de db
+- Taper la commande suivante pour installer les dépendances
 
-Grâce à cette liste:
-
-- **Exercices :** pour comprendre rapidement une techno avant de passer aux projects. On pourra se donner comme projet, 1 semaine maximum pour terminer 30 exercices sur un thème, comme javascript, POO etc... A nous de trouver les exercices avec les corrections. (C'est un exemple).
-- **Projets solo :** On pourra créer des projets, pour mettre en pratique les notions vues dans les exercices, et apprendre à bien gérer un projet.
-- **Projets groupe :** pour apprendre à travailler avec d'autres personnes, et apprendre à utiliser des outils collaboratifs (git, trello, etc...).
-- **Tutoriels et Documentation :** les tutoriels et documentations servent à synthétiser le savoir et les acquis : si l'on est incapable d'expliquer ce que l'on apprend, c'est peut-être que le sujet a été mal compris. Ils servent aussi à garder une trace de ce que l'on a pu faire, les erreurs et problèmes rencontrés pour y revenir plus tard et gagner du temps. Tous les documents du projet se trouveront sur le lien git relié au projet.
-
-### Va-t-il résoudre le problème de focus et procrastination ?
-
-Le fait d'avoir une interface bloquant les futurs projets et demandant de terminer 1 ET 1 seul projet, va obliger l'utilisateur à se concentrer uniquement sur ce projet pour évoluer. La finalisation des projets et leur avancée vont nous donner envie de continuer... (en tout cas j'espère :+1:)
-
- Structure
- ==
-
--- Le site web, permettra à l'utilisateur de créer des projets.
--- Chaque projet à un/plusieurs projects à finir avant de pouvoir débuter celui en question.
--- Les projects ont des rendues : soit des documentation, des tutos, ou des explications tout simplement.
-+- Le site web permet à l'utilisateur de créer des projets.
-+- Chaque utilisateur a un ou plusieurs projects à finir avant de pouvoir débuter le suivant.
-+- Les projets ont des rendus : documentations, tutos, ou simples explications.
- - Tous les documents du projet se trouvent sur le lien git.
-
-Maquettes
-===
-## Liste projets
-![](https://i.imgur.com/wrHqPSD.png)
-
-Architecture technique
-===
-
-## Technos
-- Backend
-  * Node.js
-  * ExpressJS
-  * MongoDB
-- Frontend
-  * Angular 4
-  * HTML / CSS
-
-- Coding Style
-  * Airbnb style https://github.com/nmussy/javascript-style-guide
-  * ES6
-
-Git
-===
-## Utilisation de git
-
-Lien : https://github.com/Coyla/road-to-ninja
-
-- La branche principale est master.
-- Chaque personne travaille sur une "feature" (fonctionnalité), pour cela il faut créer une nouvelle branche.
-- Chaque changement pendant le développement de la feature doit être commit et push sur le serveur Github
-- Une fois le développement de la feature terminé, une pull request sur la branche stable (master) est demandée, et la validation est effectuée par un admin.
-- Les bugs/corrections doivent aussi être faits sur une branche differente.
-
-## Nommage des branches
-
-### Features
-Pour le développement des TODO et fonctionnalités
-
-ft/[feature-name]
+```bash
+  npm install
+```
+- Lancer le serveur API avec la commande:
 
 ```
-ft/add-project-admin/
-ft/start-project-user
+npm run start:dev
+npm run start
 ```
 
-### HotFix
-Pour les corrections, la maintenance, les petits changements, le refactoring ...
+- Créer les jeux de données, taper les urls
+    - http://localhost:3000/seed/users
+    - http://localhost:3000/seed/projects
 
-hf/[hotfix-name]
+![](https://i.imgur.com/2NuUX6V.png)
 
 
+
+- Vous pouvez tester l'API en utilisant le swagger
+
+- taper l'url: http://localhost:3000/explorer/#/
+
+- Utiliser la route auth/login, click sur le bouton "try it out"
+- username = demo et password = demo
+
+![](https://i.imgur.com/WcVwibc.png)
+
+- Récupérer (copiez) les token de la réponse
+
+![](https://i.imgur.com/bYFoBMa.png)
+
+
+- Click sur Authorize et rentrez copier le token
+
+![](https://i.imgur.com/dpVjyn1.png)
+
+
+- Vous pouvez maintenant accéder aux autres routes
+
+
+
+
+## Configuration
+
+Pour permettre la connection à la base de données on crée un fichier de configuration, avec une base de données appelé "dev"
+
+```json
+{
+  "db" : {
+    "uri" : "mongodb://127.0.0.1:27017/dev"
+  },
+  "server" : {
+    "host" : "127.0.0.1",
+    "port" : 3000
+  }
+}
 ```
-hf/change-project/
-hf/d123-hf/
+
+> Pour tester l'app vous devez créer un base de données mongo appelé "dev"
+>
+
+## Jeu de données
+
+Vous pouvez créer un jeu de données avec les routes /seeds/users et /seeds/projects
+Il faut les lancer dans l'ordre cette ordre précis.
+
+
+## Authentification
+
+route: auth/login
+
+Avec un middleware sur la route on vérifie d'abord si l'utilisateur a bien renseigné les champs "username" et "password" dans le body de sa requête.
+
+C'est la méthode "hasRequiredParameters" qui fait cette vérification
+
+```javascript=
+router.post('/login', requestMiddleware.hasRequiredParameters, async (req, res) => {}
 ```
 
-### BugFix
-Pour les bugs, un bug n'est pas forcement à traiter immédiatement, il sera mis dans un patch de correction.
+Ensuite si l'utilisateur existe dans la base de données on crée un JWT (jeton) avec une date d'expiration et on l'envoie dans la réponse.
 
-bf/[bugfix-name]
+Pour cela on utilise le package "jsonwebtoken"
+
+
+## Les models
+
+Pour faire une relation entre les documents (tables) de notre base de données et notre code on utilise l'outils moongoose
+
+- Il permet de décrire les propriétés d'un model/document
+- Met a disposition des fonctions pour requeter les models/base de données
+
+Voici un example pour un model utilisateur
+
+```javascript=
+const schema = new mongoose.Schema({
+  username: String,
+  uid: String,
+  name: String,
+  password: String,
+  admin: Boolean,
+});
+
+const User = mongoose.model('users', schema);
+
+const findAll = () => {
+  return User.find().exec();
+};
 ```
-bf/setup-database
+
+## Services
+
+Les services sont une couche dans l'architecture de l'application qui va utiliser des models pour proposer des services de type metier.
+
+Dans notre application les services sont très basiques et n'ont pas + de traitement de données que les méthodes de models.
+
+## Routes/Controllers
+
+Dans cette route j'effectue des controlles pour savoir quel service je dois appeler.
+
+De plus on peut faire des vérifications à l'aide de middlewares, comment la vérification de la presence d'un token dans la requête de l'utilisateur. C'est cette vérification qu'on fait ici.
+
+```javascript=
+token.verifyToken,
+  async (req, res) => {
+  try {
+    const users = await userService.findAll();
+    res.send(users);
+  } catch (e) {
+    logger.info(e);
+    return res.status(500).send('not found');
+  }
 ```
-
-Trello
-==
-
-Lien du board : https://trello.com/b/UPrATOhl/road-to-ninja
-- Une carte = une tâche.
-- Si possible, ajouter un élément de "checklist" dans une carte pour décrire les étapes pour compléter la carte. Si la carte a besoin d'être coupée, on peut en créer une nouvelle, mais il faut préciser dans le titre qu'elle appartient à une autre carte.
-- Les éléments d'une checklist sont arbitraires : cela peut-être de toutes petites taches (ex : initialiser une variable... ) ou des plus importantes  (ex : créer un service web).
-- Pour rajouter une checklist : cliquer sur la carte --> à droite dans Add, cliquer sur Checklist --> rajouter les elements.
-- Toujours ajouter un label (feature, bug, etc).
-- Si besoin, ajouter un commentaire dans le "card" pour rajouter des informations.
-- Le backlog regroupe toutes les fonctionnalités. Chaque semaine, certaines cartes doivent être déplacées vers le TODO. Aucune carte ne doit être ajoutée dans TODO en milieu de semaine.
-
-Exemple de checklist pour une US (User Story)
-[] Installer Express
-[] Appeler l'API blabla
-[] Rajouter les données dans le template Angular...
-
-
